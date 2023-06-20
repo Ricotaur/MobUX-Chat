@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import TopAppBar from "./components/TopAppBar";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 import GroupChat from "./components/GroupChat";
 import MediaPage from "./components/MediaPage";
@@ -19,7 +19,7 @@ export default function App() {
   return (
     <ThemeContext.Provider value={{theme, setTheme}}>
     <div className="App" id={theme}>
-      <BrowserRouter>
+      <HashRouter>
         <TopAppBar path={window.location.pathname} setTheme = {themeChange}/>
         <Routes>
           <Route path="/" element={<LoginPage />} />
@@ -27,7 +27,7 @@ export default function App() {
           <Route path="/chat" element={<GroupChat />} />
           <Route path="/media" element={<MediaPage />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
     </ThemeContext.Provider>
   );
