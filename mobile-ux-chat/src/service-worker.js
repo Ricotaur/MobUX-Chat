@@ -70,3 +70,10 @@ self.addEventListener('message', (event) => {
 });
 
 // Any other custom service worker logic can go here.
+
+registerRoute(
+  ({url, request}) => request.method === 'POST' && request.json().request === 'fetchmessages',
+  new NetworkFirst({ //network with cache fallback
+    cacheName: 'messages',
+  })
+)
