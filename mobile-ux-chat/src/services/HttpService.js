@@ -72,7 +72,7 @@ async function getMessages(userid, sessionToken) {
 }
 
 async function getMessagesWithGet(userid, sessionToken) {
-    const response = await _axios.get(baseUrl + "?request=fetchmessages&userid=" + userid + "&sessionToken=" + sessionToken);
+    const response = await _axios.get(baseUrl + "?request=fetchmessages&token=" + token);
     return response;
 }
 
