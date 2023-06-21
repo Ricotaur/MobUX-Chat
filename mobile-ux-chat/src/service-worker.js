@@ -48,17 +48,13 @@ registerRoute(
 
 registerRoute(
   ({ request }) => request.method === 'POST' && request.json().request === 'fetchmessages',
-  (args) => {
-    return new StaleWhileRevalidate({
+    new StaleWhileRevalidate({
       cacheName: 'messages',
       plugins: [
         new ExpirationPlugin({ maxEntries: 500 }),
       ],
-    }).handle(args).then(() => {
-      console.log("fetchmessages intercepted");
-    });
-  }
-);
+  })
+).catchHandler((error) => { console.log("fetchmessages error: " + error); });
 
 // An example runtime caching route for requests that aren't handled by the
 // precache, in this case same-origin .png requests like those from in public/
