@@ -49,6 +49,7 @@ registerRoute(
 registerRoute(
   ({request}) => request.method === 'POST' && request.json().request === 'fetchmessages',
   console.log("fetchmessages intercepted"),
+  console.dir(request),
   new StaleWhileRevalidate({
     cacheName: 'messages',
     plugins: [
