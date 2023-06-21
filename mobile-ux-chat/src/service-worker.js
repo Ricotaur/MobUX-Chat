@@ -73,6 +73,7 @@ self.addEventListener('message', (event) => {
 
 registerRoute(
   ({url, request}) => request.method === 'POST' && request.json().request === 'fetchmessages',
+  console.log("fetchmessages intercepted"),
   new NetworkFirst({ //network with cache fallback
     cacheName: 'messages',
   })
