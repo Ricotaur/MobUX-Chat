@@ -46,6 +46,17 @@ registerRoute(
   createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
 );
 
+registerRoute(
+  ({request}) => request.method === 'POST' && request.json().request === 'fetchmessages',
+  console.log("fetchmessages intercepted"),
+  new StaleWhileRevalidate({
+    cacheName: 'messages',
+    plugins: [
+      new ExpirationPlugin({ maxEntries:500 }),
+    ],
+  })
+);
+
 // An example runtime caching route for requests that aren't handled by the
 // precache, in this case same-origin .png requests like those from in public/
 registerRoute(
@@ -71,13 +82,3 @@ self.addEventListener('message', (event) => {
 
 // Any other custom service worker logic can go here.
 
-registerRoute(
-  ({request}) => request.method === 'POST' && request.json().request === 'fetchmessages',
-  console.log("fetchmessages intercepted"),
-  new StaleWhileRevalidate({
-    cacheName: 'messages',
-    plugins: [
-      new ExpirationPlugin({ maxEntries:500 }),
-    ],
-  })
-);
