@@ -46,7 +46,7 @@ registerRoute(
   createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
 );
 
-registerRoute(
+/* registerRoute(
   ({ request }) => request.method === 'POST' && request.json().request === 'fetchmessages',
   new StaleWhileRevalidate({
     cacheName: 'messages',
@@ -54,7 +54,20 @@ registerRoute(
       new ExpirationPlugin({ maxEntries: 500 }),
     ],
   })
-).catch((error) => { console.log("fetchmessages error: " + error); });
+); */
+
+registerRoute(
+  // Add in any other file extensions or routing criteria as needed.
+  ({ url }) => url.pathname.includes("request=fetchmessages"), // Customize this strategy as needed, e.g., by changing to CacheFirst.
+  new StaleWhileRevalidate({
+    cacheName: 'messages',
+    plugins: [
+      // Ensure that once this runtime cache reaches a maximum size the
+      // least-recently used images are removed.
+      new ExpirationPlugin({ maxEntries: 500 }),
+    ],
+  })
+);
 
 // An example runtime caching route for requests that aren't handled by the
 // precache, in this case same-origin .png requests like those from in public/

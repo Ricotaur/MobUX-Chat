@@ -9,7 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 function GroupChat() {
   useEffect(() => {
-    HttpService.getMessages().then((response) => {
+    HttpService.getMessagesWithGet().then((response) => {
       setMessages(response.data.messages);
       console.dir(response);
     })

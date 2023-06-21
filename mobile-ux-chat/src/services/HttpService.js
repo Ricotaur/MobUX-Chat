@@ -71,6 +71,11 @@ async function getMessages(userid, sessionToken) {
     return response;
 }
 
+async function getMessagesWithGet(userid, sessionToken) {
+    const response = await _axios.get(baseUrl + "?request=fetchmessages&userid=" + userid + "&sessionToken=" + sessionToken);
+    return response;
+}
+
 async function fetchPhoto(userid, photoid, sessionToken) {
     //const response = await _axios.get(baseUrl + "fetchPhoto&userid=" + userid + "&photoid=" + photoid + "&sessionToken=" + sessionToken);
     const response = await axios.get(baseUrl + '?request=fetchphoto&photoid=' + photoid + '&token=' + token, axiosConfig);
@@ -102,6 +107,7 @@ const HttpService = {
     logout,
     register,
     getMessages,
+    getMessagesWithGet,
     fetchPhoto,
     sendMessage,
     deregister,
