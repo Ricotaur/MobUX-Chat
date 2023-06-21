@@ -20,6 +20,7 @@ const getAxiosClient = () => _axios;
 
 if (window.caches) {
     caches.open("profile-cache");
+    caches.open("messages");
 }
 
 async function register(userid, password, nickname, fullname) {
