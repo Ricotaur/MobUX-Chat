@@ -72,7 +72,7 @@ self.addEventListener('message', (event) => {
 // Any other custom service worker logic can go here.
 
 registerRoute(
-  ({url, request}) => request.method === 'POST' && request.json().request === 'fetchmessages',
+  ({request}) => request.method === 'POST' && request.json().request === 'fetchmessages',
   console.log("fetchmessages intercepted"),
   new StaleWhileRevalidate({
     cacheName: 'messages',
@@ -80,4 +80,4 @@ registerRoute(
       new ExpirationPlugin({ maxEntries:500 }),
     ],
   })
-)
+);
