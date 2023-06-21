@@ -12,7 +12,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-console.log('Register service worker (V13)');
+console.log('Register service worker (V14)');
 serviceWorkerRegistration.register();
 
 // If you want to start measuring performance in your app, pass a function
