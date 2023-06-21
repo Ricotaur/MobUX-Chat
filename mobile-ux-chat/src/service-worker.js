@@ -49,13 +49,14 @@ registerRoute(
 registerRoute(
   ({ request }) => request.method === 'POST' && request.json().request === 'fetchmessages',
   (args) => {
-    console.log("fetchmessages intercepted");
     return new StaleWhileRevalidate({
       cacheName: 'messages',
       plugins: [
         new ExpirationPlugin({ maxEntries: 500 }),
       ],
-    }).handle(args);
+    }).handle(args).then(() => {
+      console.log("fetchmessages intercepted");
+    });
   }
 );
 
@@ -65,7 +66,7 @@ registerRoute(
   // Add in any other file extensions or routing criteria as needed.
   ({ url }) => url.origin === self.location.origin && url.pathname.endsWith('.png'), // Customize this strategy as needed, e.g., by changing to CacheFirst.
   new StaleWhileRevalidate({
-    cacheName: 'images',
+    cacheName: 'imagess',
     plugins: [
       // Ensure that once this runtime cache reaches a maximum size the
       // least-recently used images are removed.
