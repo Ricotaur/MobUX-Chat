@@ -47,13 +47,16 @@ registerRoute(
 );
 
 registerRoute(
-  ({request}) => request.method === 'POST' && request.json().request === 'fetchmessages',
-  new StaleWhileRevalidate({
-    cacheName: 'messages',
-    plugins: [
-      new ExpirationPlugin({ maxEntries:500 }),
-    ],
-  })
+  ({ request }) => request.method === 'POST' && request.json().request === 'fetchmessages',
+  (args) => {
+    console.log("fetchmessages intercepted");
+    return new StaleWhileRevalidate({
+      cacheName: 'messages',
+      plugins: [
+        new ExpirationPlugin({ maxEntries: 500 }),
+      ],
+    }).handle(args);
+  }
 );
 
 // An example runtime caching route for requests that aren't handled by the
