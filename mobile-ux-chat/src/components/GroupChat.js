@@ -46,6 +46,7 @@ function GroupChat() {
         .then(() => {
           HttpService.getMessages().then((response) => {
             setMessages(response.data.messages);
+            bottomRef.current.scrollIntoView({ behavior: "smooth" });
           });
         });
     }
@@ -66,7 +67,21 @@ function GroupChat() {
   }
 
   useEffect(() => {
-    bottomRef.current.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      console.log("scrolling");
+      bottomRef.current.scrollIntoView({ behavior: "smooth" });
+    }, 2000);
+    /* if (document.readyState === 'complete') {
+      bottomRef.current.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.addEventListener('load', () => {
+        bottomRef.current.scrollIntoView({ behavior: "smooth" });
+      });
+      return () => window.removeEventListener('load', () => {
+        bottomRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+      );
+    } */
   }, [messages]);
 
   console.dir(messages);
@@ -87,8 +102,6 @@ function GroupChat() {
       style={{overflowY: 'scroll',
               height: '100%',
               paddingBottom: '20dvh',
-              paddingTop: '5dvh',
-              marginTop: '5dvh',
               display: 'flex',
               flexDirection: 'column',
             }}
@@ -105,7 +118,7 @@ function GroupChat() {
             </MessageCard>
           </div>
         )}
-        <div ref={bottomRef} id="bottomRef" style={{marginBottom: '10em'}}></div>
+        <div ref={bottomRef} id="bottomRef"></div>
       </div>
       <div className="inputs" style={{width: '100%',
                                       display: 'flex',
