@@ -78,7 +78,8 @@ async function getMessagesWithGet(userid, sessionToken) {
 
 async function fetchPhoto(userid, photoid, sessionToken) {
     //const response = await _axios.get(baseUrl + "fetchPhoto&userid=" + userid + "&photoid=" + photoid + "&sessionToken=" + sessionToken);
-    const response = await axios.get(baseUrl + '?request=fetchphoto&photoid=' + photoid + '&token=' + token, axiosConfig);
+    //const response = await axios.get(baseUrl + '?request=fetchphoto&photoid=' + photoid + '&token=' + token, axiosConfig);
+    const response = await fetch(baseUrl + '?request=fetchmessages&token=' + token);
     return response;
 }
 
