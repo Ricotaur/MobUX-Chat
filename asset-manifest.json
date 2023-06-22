@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/MobUX-Chat/static/css/main.90b9b5b5.css",
-    "main.js": "/MobUX-Chat/static/js/main.c74e1a2d.js",
+    "main.js": "/MobUX-Chat/static/js/main.0ff002b1.js",
     "static/js/787.2f04c861.chunk.js": "/MobUX-Chat/static/js/787.2f04c861.chunk.js",
     "service-worker.js": "/MobUX-Chat/service-worker.js",
     "index.html": "/MobUX-Chat/index.html",
     "main.90b9b5b5.css.map": "/MobUX-Chat/static/css/main.90b9b5b5.css.map",
-    "main.c74e1a2d.js.map": "/MobUX-Chat/static/js/main.c74e1a2d.js.map",
+    "main.0ff002b1.js.map": "/MobUX-Chat/static/js/main.0ff002b1.js.map",
     "787.2f04c861.chunk.js.map": "/MobUX-Chat/static/js/787.2f04c861.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.90b9b5b5.css",
-    "static/js/main.c74e1a2d.js"
+    "static/js/main.0ff002b1.js"
   ]
 }
