@@ -56,7 +56,7 @@ registerRoute(
   })
 ); */
 
-registerRoute(
+/* registerRoute(
   // Add in any other file extensions or routing criteria as needed.
   ({ url }) => url.pathname.includes("request=fetchmessages"), // Customize this strategy as needed, e.g., by changing to CacheFirst.
   console.log("fetchmessages intercepted"),
@@ -68,7 +68,23 @@ registerRoute(
       new ExpirationPlugin({ maxEntries: 500 }),
     ],
   })
-);
+); */
+
+self.addEventListener('fetch', function(event) {
+  const url = new URL(event.request.url);
+  if (url.pathname.includes("request=fetchmessages")) {
+    console.log("fetchmessages intercepted");
+    event.respondWith(
+      fetch(event.request).then((res) => {
+        caches.open('messages').then((cache) => {
+          cache.put(event.request, res);
+        });
+        return res.clone();
+      })
+      ).catch((err) => { caches.match(event.request) });
+  }
+});
+
 
 // An example runtime caching route for requests that aren't handled by the
 // precache, in this case same-origin .png requests like those from in public/
