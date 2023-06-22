@@ -75,13 +75,14 @@ self.addEventListener('fetch', function(event) {
   if (url.pathname.includes("request=fetchmessages")) {
     console.log("fetchmessages intercepted");
     event.respondWith(
-      fetch(event.request).then((res) => {
+      fetch(event.request)
+      .then((res) => {
         caches.open('messages').then((cache) => {
           cache.put(event.request, res);
         });
         return res.clone();
       })
-      ).catch((err) => { caches.match(event.request) });
+      ).catch((err) => { return caches.match(event.request) });
   }
 });
 
