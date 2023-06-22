@@ -24,8 +24,7 @@ const TopAppBar = (props) => {
 }, [location.pathname]);
 
   const handleBackClick = () => {
-    //props.setPath("/");
-    window.location.replace("https://ricotaur.github.io/MobUX-Chat/#/")
+    props.setPath("/");
   };
 
   const handleSettingsOpen = () => {

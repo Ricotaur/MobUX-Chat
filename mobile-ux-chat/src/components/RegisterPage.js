@@ -38,8 +38,7 @@ const RegisterPage = (props) => {
   const location = useLocation();
 
   useEffect(() => {
-    //props.setPath(location.pathname);
-    window.location.replace("https://ricotaur.github.io/MobUX-Chat/#/")
+    props.setPath(location.pathname);
   });
 
     return(
