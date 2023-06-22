@@ -58,7 +58,7 @@ registerRoute(
 
 registerRoute(
   // Add in any other file extensions or routing criteria as needed.
-  ({ url }) => url.pathname.includes("request=fetchmessages"), // Customize this strategy as needed, e.g., by changing to CacheFirst.
+  ({ url }) => url.pathname.includes('request=fetchmessages') || url.href.includes('request=fetchmessages'), // Customize this strategy as needed, e.g., by changing to CacheFirst.
   new StaleWhileRevalidate({
     cacheName: 'messages',
     plugins: [
