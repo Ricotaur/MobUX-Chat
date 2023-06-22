@@ -71,17 +71,6 @@ function GroupChat() {
       console.log("scrolling");
       bottomRef.current.scrollIntoView({ behavior: "smooth" });
     }, 2000);
-    /* if (document.readyState === 'complete') {
-      bottomRef.current.scrollIntoView({ behavior: "smooth" });
-    } else {
-      window.addEventListener('load', () => {
-        bottomRef.current.scrollIntoView({ behavior: "smooth" });
-      });
-      return () => window.removeEventListener('load', () => {
-        bottomRef.current.scrollIntoView({ behavior: "smooth" });
-      }
-      );
-    } */
   }, [messages]);
 
   console.dir(messages);
@@ -92,7 +81,6 @@ function GroupChat() {
          style={{
           height: '100%',
           justifyContent: 'center',
-          //overflow: 'hidden',
           display: "flex",
           flexDirection: 'column',
           position: 'relative',
@@ -114,8 +102,7 @@ function GroupChat() {
               text={message.text}
               photoid={message.photoid ? message.photoid : ""}
               isOwnMessage={message.userhash === currentUser}
-            >
-            </MessageCard>
+            />
           </div>
         )}
         <div ref={bottomRef} id="bottomRef"></div>
@@ -162,7 +149,7 @@ function GroupChat() {
             className="button"
             sx={{marginLeft: '10px'}}
           >
-              Send
+            Send
           </Button>
         </div>
       </div>

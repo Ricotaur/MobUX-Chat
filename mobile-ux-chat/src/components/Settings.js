@@ -10,10 +10,8 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { Link } from "react-router-dom";
-import HttpService from '../services/HttpService';
 
-const Settings = (props, {setNewTheme}) => {
+const Settings = (props) => {
   const {open, onClose} = props;  
 
   const [value, setValue] = React.useState(localStorage.getItem("theme") !== null ? localStorage.getItem("theme") : "light");
@@ -34,27 +32,26 @@ const Settings = (props, {setNewTheme}) => {
                     justifyContent: "center",
                     flexDirection: "column",
                     }}>
-        <FormControl sx={{paddingTop: "10px", borderTop: "2px solid black"}}>
-          <FormLabel>Chat Options</FormLabel>         
-            <FormControlLabel
-            control={<Checkbox />}
-            label="Mute Chat"
-            labelPlacement="end"
-            />
-          <Button variant="outlined" sx={{marginBottom: "20px", textTransform: "unset !important"}}>Leave Chat</Button>
-        </FormControl>
+          <FormControl sx={{paddingTop: "10px", borderTop: "2px solid black"}}>
+            <FormLabel>Chat Options</FormLabel>         
+              <FormControlLabel
+                control={<Checkbox />}
+                label="Mute Chat"
+                labelPlacement="end"
+              />
+            <Button variant="outlined" style={{marginBottom: "20px"}}>Leave Chat</Button>
+          </FormControl>
 
-        <FormControl sx={{paddingTop: "10px", borderTop: "2px solid black", borderBottom: "2px solid black"}}>
+          <FormControl sx={{paddingTop: "10px", borderTop: "2px solid black", borderBottom: "2px solid black"}}>
             <FormLabel>Theme</FormLabel>
-                <RadioGroup
-                    value={value}
-                    onChange={handleChange}
+              <RadioGroup
+                  value={value}
+                  onChange={handleChange}
                 >
-        <FormControlLabel value="light"  control={<Radio />} label="Light Mode" />
-        <FormControlLabel value="dark"  control={<Radio />} label="Dark Mode" />
-        </RadioGroup>
-        </FormControl>
-        
+                <FormControlLabel value="light" control={<Radio />} label="Light Mode" />
+                <FormControlLabel value="dark" control={<Radio />} label="Dark Mode" />
+              </RadioGroup>
+          </FormControl>
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose}>Close</Button>
