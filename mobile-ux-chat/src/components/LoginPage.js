@@ -26,7 +26,7 @@ export default function LoginPage() {
   };
 
     useEffect(() => {
-        const token = JSON.parse(localStorage.getItem("loginToken"));
+        const token = localStorage.getItem("loginToken");
         if (token !== null) {
           navigate('/chat');
         }
