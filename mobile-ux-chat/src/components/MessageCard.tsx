@@ -1,6 +1,6 @@
-import { Box, styled } from '@mui/material';
+import { Box, styled, Dialog, AppBar, Toolbar, IconButton } from '@mui/material';
 import React, { PropsWithChildren } from 'react';
-import HttpService from '../services/HttpService';
+import CloseIcon from '@mui/icons-material/Close';
 
 type Props = {
   text: String;
@@ -33,6 +33,17 @@ function MessageCard({ usernickname, text, photoid, time, isOwnMessage }: PropsW
   const boxMargin = isOwnMessage ? '5px 10px 5px 10px': '10px';
   const imageSrc = "https://www2.hs-esslingen.de/~melcher/map/chat/api/?request=getphoto&token=" + localStorage.getItem("loginToken") + "&photoid=" + photoid;
   let image;
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   if (photoid) {
     image = <img src={imageSrc} alt="" style={{maxWidth: '100%',
                                                maxHeight: '100%',
@@ -55,9 +66,33 @@ function MessageCard({ usernickname, text, photoid, time, isOwnMessage }: PropsW
                                               padding: '0.2em 0.4em 0.2em 0.4em'}}>
           {limitedText}
         </div>
-        <div className='message-image'>
+        <div className='message-image' onClick={handleClickOpen}>
           {image}
         </div>
+        <Dialog
+        fullScreen
+        PaperProps={{
+          style: {
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(1em)',
+            boxShadow: 'none',
+          },
+      }}
+        open={open}
+        onClick={handleClose}
+        onClose={handleClose}
+      >
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClose}
+              aria-label="close"
+              style={{justifyContent: 'right'}}
+            >
+              <CloseIcon style={{color: 'whitesmoke'}}/>
+            </IconButton>
+        {image}
+      </Dialog>
         <div className='message-date' style={{fontWeight: 'lighter',
                                               padding: '0 0.4em 0 0.4em'}}>
           {time}
