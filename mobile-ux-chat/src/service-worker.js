@@ -69,6 +69,19 @@ registerRoute(
   })
 );
 
+registerRoute(
+  // Add in any other file extensions or routing criteria as needed.
+  ({ url }) => url.href.includes('getphoto'), // Customize this strategy as needed, e.g., by changing to CacheFirst.
+  new StaleWhileRevalidate({
+    cacheName: 'photos',
+    plugins: [
+      // Ensure that once this runtime cache reaches a maximum size the
+      // least-recently used images are removed.
+      new ExpirationPlugin({ maxEntries: 500 }),
+    ],
+  })
+);
+
 /* self.addEventListener('fetch', function(event) {
   const url = new URL(event.request.url);
   if (url.pathname.includes("request=fetchmessages")) {
