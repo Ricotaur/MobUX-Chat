@@ -59,7 +59,7 @@ registerRoute(
 registerRoute(
   // Add in any other file extensions or routing criteria as needed.
   ({ url }) => url.pathname.includes('request=fetchmessages') || url.href.includes('request=fetchmessages'), // Customize this strategy as needed, e.g., by changing to CacheFirst.
-  new StaleWhileRevalidate({
+  new NetworkFirst({
     cacheName: 'messages',
     plugins: [
       // Ensure that once this runtime cache reaches a maximum size the
@@ -72,7 +72,7 @@ registerRoute(
 registerRoute(
   // Add in any other file extensions or routing criteria as needed.
   ({ url }) => url.href.includes('getphoto'), // Customize this strategy as needed, e.g., by changing to CacheFirst.
-  new StaleWhileRevalidate({
+  new NetworkFirst({
     cacheName: 'photos',
     plugins: [
       // Ensure that once this runtime cache reaches a maximum size the
