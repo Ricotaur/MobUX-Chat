@@ -18,6 +18,7 @@ const RegisterPage = (props) => {
   const [realname, setRealname] = useState(".");
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [registerFail, setRegisterFail] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
@@ -30,6 +31,10 @@ const RegisterPage = (props) => {
         .then((response) => {
           console.dir(response);
           navigate('/chat');
+        })
+        .catch((error) => {
+          console.dir(error);
+          setRegisterFail(true);
         })
     }
     
@@ -132,6 +137,7 @@ const RegisterPage = (props) => {
             }}
           />
       </Box>
+      {registerFail && <p style={{color: "red"}}>Registration failed. Use of correct HSE-ID as Username? Please try again.</p>}
       <Button variant="contained" onClick={handleRegister} sx={{marginBottom: "2vh"}}>Register</Button>
       </div>
     );
